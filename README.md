@@ -1,4 +1,4 @@
-# 6‑DoF Flat‑Earth Dynamics Simulator (C++17)
+# Aircraft 6‑DoF Simulator (C++17)
 
 A small C++17 project that simulates rigid‑body dynamics in a flat‑earth frame and visualizes results with **matplotlib‑cpp** (C++ bindings over Python’s matplotlib). It includes:
 - A 12‑state 6‑DoF equations‑of‑motion (EoM) function
