@@ -1,0 +1,19 @@
+# C/C++
+build/
+cmake-build-*/
+*.o
+*.obj
+*.exe
+*.dll
+*.so
+*.dylib
+
+# Python caches (matplotlibcpp embeds Python)
+__pycache__/
+*.pyc
+
+# macOS
+.DS_Store
+
+# Visual Studio Code
+.vscode/
