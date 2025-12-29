@@ -1,5 +1,8 @@
 # Aircraft 6-DoF Simulator (C++20)
 
+**[Live Demo](https://chrisfrancisque.github.io/Aircraft-6DOF-Simulation/)** — Try in your browser.
+
+
 A small C++20 project that simulates rigid-body dynamics in a flat-earth frame. Includes both a command-line version with matplotlib plotting and an interactive 3D web frontend using WebAssembly and Three.js.
 
 Features:
