@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>6-DoF Flight Simulator</title>
+    <link rel="stylesheet" href="style.css">
+    <script src="/simulation.js"></script>
+</head>
+<body>
+    <div id="container">
+        <canvas id="scene"></canvas>
+        
+        <div id="overlay">
+            <h2>6-DoF Simulator</h2>
+            <p>Altitude: <span id="altitude">9000</span> m</p>
+            <p>Velocity: <span id="velocity">0</span> m/s</p>
+            <p>Mach: <span id="mach">0.00</span></p>
+            <p>Time: <span id="time">0.0</span> s</p>
+        </div>
+
+        <div id="controls">
+            <h3>Controls</h3>
+            
+            <label for="vehicleSelect">Vehicle:</label>
+            <select id="vehicleSelect">
+                <option value="brick">Tumbling Brick</option>
+                <option value="bowlingball">Bowling Ball</option>
+                <option value="blueberry">Blueberry</option>
+            </select>
+
+            <label for="altitudeSlider">Starting Altitude:</label>
+            <div class="slider-container">
+                <input type="range" id="altitudeSlider" min="100" max="20000" value="9000" step="100">
+                <span id="altitudeValue">9000 m</span>
+            </div>
+
+            <label for="speedSlider">Playback Speed:</label>
+            <div class="slider-container">
+                <input type="range" id="speedSlider" min="1" max="10" value="1" step="1">
+                <span id="speedValue">1x</span>
+            </div>
+
+            <div id="buttons">
+                <button id="startBtn">Start</button>
+                <button id="resetBtn">Reset</button>
+            </div>
+
+            <div id="status">Ready</div>
+        </div>
+
+        
+    </div>
+    <script type="module" src="/src/main.js"></script>
+</body>
+</html>
