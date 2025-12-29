@@ -160,7 +160,7 @@ std::vector<double> flat_earth_eom(double t, const std::vector<double> x, const 
 	}
 
 	double Mach = true_airspeed_mps / c_mp2;
-	double alpha_rad = std::atan(w_over_u);
+	double alpha_rad = std::atan2(w_b_mps, u_b_mps);
 	double beta_rad = std::asin(v_over_VT);
 
 
@@ -255,7 +255,7 @@ std::vector<double> flat_earth_eom(double t, const std::vector<double> x, const 
 
 	// Position (Navagation) equations
 
-	dx[9] = c_theta*c_psi*u_b_mps + (-c_phi*s_psi + s_psi*s_theta*c_psi) * v_b_mps
+	dx[9] = c_theta*c_psi*u_b_mps + (-c_phi*s_psi + s_phi*s_theta*c_psi) * v_b_mps
 		  + (s_phi*s_psi + c_phi*s_theta*c_psi)* w_b_mps ;
 
 	dx[10] = c_theta * s_psi * u_b_mps + (c_phi*c_psi+s_phi*s_theta*s_psi) * v_b_mps 

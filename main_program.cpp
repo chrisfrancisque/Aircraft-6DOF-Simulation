@@ -132,21 +132,28 @@ int main()
     // Angle of attack
     std::vector<double> Alpha_rad(nt_s, 0.0); // Initialize a vector with nt_s elements, all set to 0.0
 
-    for (std::size_t i = 0; i < nt_s; ++i) {
-        double w_over_v = 0.0;
+    for(std::size_t i = 0; i < nt_s; ++i){
+        Alpha_rad[i] = std::atan2(ux[2][i], ux[0][i]);
 
-
-        if (ux[0][i] == 0.0 && ux[2][i] == 0.0)
-        {
-            w_over_v = 0.0; // To avoid division by zero
-        }
-        else
-        {
-            w_over_v = ux[2][i] / ux[0][i];
-        }
-
-        Alpha_rad[i] = std::atan(w_over_v); // Compute the angle of attack in radians
     }
+
+    // for (std::size_t i = 0; i < nt_s; ++i) {
+    //     double w_over_v = 0.0;
+
+
+    //     if (ux[0][i] == 0.0 && ux[2][i] == 0.0)
+    //     {
+    //         w_over_v = 0.0; // To avoid division by zero
+    //     }
+    //     else
+    //     {
+    //         w_over_v = ux[2][i] / ux[0][i];
+    //     }
+
+    //     Alpha_rad[i] = std::atan(w_over_v); // Compute the angle of attack in radians
+    // }
+
+
 
 
     // Angle of side slip
@@ -163,7 +170,7 @@ int main()
 
         else
         {
-            v_over_VT = x[1][i] / True_Airspeed_mps[i];
+            v_over_VT = ux[1][i] / True_Airspeed_mps[i];
         }
         Beta_rad[i] = std::asin(v_over_VT);
     }
@@ -322,7 +329,6 @@ int main()
     plt::plot(ut_s, Alpha_deg, { {"color", "magenta"} });
     plt::xlabel("Time [s]", { {"color" , "black"} });
     plt::ylabel("Angle of Attack [deg]", { {"color" , "black"} });
-    plt::ylim(-90, 90);
     plt::grid(true);
 
 
@@ -335,7 +341,6 @@ int main()
     plt::plot(ut_s, Beta_deg, { {"color", "magenta"} });
     plt::xlabel("Time [s]", { {"color" , "black"} });
     plt::ylabel("Angle of Side Slip [deg]", { {"color" , "black"} });
-    plt::ylim(-90, 90);
     plt::grid(true);
 
     // Mach Number
@@ -343,7 +348,6 @@ int main()
     plt::plot(ut_s, Mach, { {"color", "magenta"} });
     plt::xlabel("Time [s]", { {"color" , "black"} });
     plt::ylabel("Mach Number", { {"color" , "black"} });
-    plt::ylim(-90, 90);
     plt::grid(true);
 
     // Adjust layout and show the plot

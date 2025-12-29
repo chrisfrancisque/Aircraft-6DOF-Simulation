@@ -325,7 +325,7 @@ std::unordered_map<std::string, double> NASA_Atmos02_Brick()
 
 
 	double m_brick_slug = 0.1554048;
-	double m_brick_kg = kg2slug * m_brick_slug;
+	double m_brick_kg = slug2kg * m_brick_slug;  // Correct: 0.155 slugs × 14.6 = 2.27 kg
 
 	// Moments and products of inertia
 	double Jxx_slugft2 = 0.00189422;
@@ -416,8 +416,7 @@ std::unordered_map<std::string, double> NASA_Atmos03_Brick()
 
 
 	double m_brick_slug = 0.1554048;
-	double m_brick_kg = kg2slug * m_brick_slug;
-
+	double m_brick_kg = slug2kg * m_brick_slug;  // Correct: 0.155 slugs × 14.6 = 2.27 kg
 	// Moments and products of inertia
 	double Jxx_slugft2 = 0.00189422;
 	double Jxx_kgm2 = slug2kg * std::pow(ft2m, 2) * Jxx_slugft2;
@@ -495,13 +494,14 @@ std::unordered_map<std::string, double> NASA_Atmos03_Brick()
 // Roll, Pitch, Yaw moment coefficent for dampended tumbling brick simulation
 double Cl_brick(double Clp, double Clr, double p_b_rps, double r_b_rps, double b_m, double true_airspeed_mps)
 {
-	double Cl = Clp * p_b_rps * b_m / (2 * true_airspeed_mps) + Clr * r_b_rps * b_m / (2 * true_airspeed_mps);
-
-		return Cl;
-	}
+    if (true_airspeed_mps < 1e-6) return 0.0;  // Avoid division by zero
+    double Cl = Clp * p_b_rps * b_m / (2 * true_airspeed_mps) + Clr * r_b_rps * b_m / (2 * true_airspeed_mps);
+    return Cl;
+}
 
 double Cm_brick(double Cmq, double q_b_rps, double c_m, double true_airspeed_mps)
 {
+	if (true_airspeed_mps < 1e-6) return 0.0;  
 	double Cm = Cmq * q_b_rps * c_m / (2 * true_airspeed_mps);
 
 	return Cm;
@@ -509,6 +509,7 @@ double Cm_brick(double Cmq, double q_b_rps, double c_m, double true_airspeed_mps
 
 double Cn_brick(double Cnp, double Cnr, double p_b_rps, double r_b_rps, double b_m, double true_airspeed_mps)
 {
+	if (true_airspeed_mps < 1e-6) return 0.0;  
 	double Cn = Cnp * p_b_rps * b_m / (2 * true_airspeed_mps) + Cnr * r_b_rps * b_m / (2 * true_airspeed_mps);
 
 	return Cn;
@@ -522,11 +523,11 @@ double sphere_drag(double mach)
 
 	if (mach <= 0.722)
 	{
-		double cd = 0.45 * std::pow(mach, 2) + 0.424;
+		cd = 0.45 * std::pow(mach, 2) + 0.424;
  	}
 	else
 	{
-		double cd = 2.1 * std::exp(-1.16 * (mach + 0.35)) - 8.9 * std::exp(-2.2 * (mach + 0.35)) + 0.92;
+		cd = 2.1 * std::exp(-1.16 * (mach + 0.35)) - 8.9 * std::exp(-2.2 * (mach + 0.35)) + 0.92;
 	}
 
 	return cd;
