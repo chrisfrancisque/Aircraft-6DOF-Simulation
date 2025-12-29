@@ -163,11 +163,3 @@ See `.gitignore` in this repo to avoid committing build artifacts and Python cac
 - **Multiple Python versions on macOS**: Ensure `python3` and `pip3` point to the same Python version. Check with `python3 --version` and `pip3 --version`.
 
 ---
-
-## Roadmap (ideas)
-- Replace Euler angles with quaternions for singularity-free attitude
-- Add wind models and control inputs
-- Split EoM into translational/rotational sub-modules and add unit tests
-- Implement higher-order adaptive integrators with step-size control
-
----
